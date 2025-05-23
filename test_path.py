@@ -31,6 +31,7 @@ def p(**choices):
 
 class BasicTestCase(unittest.TestCase):
     def testRelpath(self):
+        """Test the relpathto() and relpath() methods"""
         root = path(p(nt='C:\\',
                       posix='/'))
         foo = root / 'foo'
@@ -132,6 +133,14 @@ class TempDirTestCase(unittest.TestCase):
         shutil.rmtree(self.tempdir)
 
     def testTouch(self):
+
+        """"
+        This touch() test sleeps in between tasks, creating the correct files then updates their
+        Modification time. It sleeps in between operations to observe the duration (time resolution)
+        of the tasks
+
+        """
+
         # NOTE: This test takes a long time to run (~10 seconds).
         # It sleeps several seconds because on Windows, the resolution
         # of a file's mtime and ctime is about 2 seconds.
